@@ -7,6 +7,13 @@
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+For my initial idea, I thought up that I should go with four classes to complete this assignment. These four classes are: User, Pet, Task, Schedule/Plan. I think the user and pet classes should be responsible for storing information about the owner and pet respectively. An object of the Task Class would be created whenever a user adds a new task, and it would have attributes such as duration and priority at least. As for the Schedule/Plan Class, it most likely will end up holding data about the overall scheduling the user has done and statuses such as task priorities and the list of tasks itself.
+
+class User: attributes like name, age, dob, num of pets, etc (other basic info). methods like getters/setters etc as needed
+class Pet: attributes like name, age, etc (other basic info). methods like getters/setters etc as needed
+class Task: an object of type Task created when user adds new task. attributes like task name, duration, priority, time etc. methods like getters/setters etc as necessary
+class Schedule: attributes like a list of Task objects. ability to change priorities and/or modify schedules as a whole most likely lies here as well.
+
 **b. Design changes**
 
 - Did your design change during implementation?
