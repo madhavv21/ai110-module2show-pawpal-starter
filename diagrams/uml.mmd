@@ -1,57 +1,74 @@
 classDiagram
-    %% PawPal+ class diagram (draft)
-    %% Four core classes from brainstorming: User, Pet, Task, Schedule
+    %% PawPal+ class diagram
+    %% Owner manages multiple Pets; each Pet owns its own Tasks;
+    %% Scheduler is the stateless "brain" that aggregates tasks across pets and builds a plan.
     %% Priority is a plain string ("low" | "medium" | "high"), matching app.py's selectbox.
 
-    class User {
-        -str name
-        -int age
-        -date dob
-        -int minutes_available
-        +set_pet(pet Pet) None
-        +get_pet() Pet
-        +get_minutes_available() int
-        +set_minutes_available(minutes int) None
-    }
-
-    class Pet {
-        -str name
-        -str species
-        -str breed
-        -int age
-        +get_name() str
-        +set_name(name str) None
-        +get_species() str
-        +describe() str
-    }
-
     class Task {
+        -str task_id
+        -str pet_id
         -str title
         -int duration_minutes
         -str priority
         -str category
         -bool recurring
+        -bool done
         +get_title() str
+        +set_title(title str) None
         +get_duration() int
         +set_duration(minutes int) None
         +get_priority() str
         +set_priority(priority str) None
+        +get_category() str
+        +set_category(category str) None
         +is_recurring() bool
+        +set_recurring(recurring bool) None
+        +is_done() bool
+        +mark_done() None
     }
 
-    class Schedule {
+    class Pet {
+        -str pet_id
+        -str name
+        -str species
+        -str breed
+        -int age
         -list~Task~ tasks
+        +get_name() str
+        +set_name(name str) None
+        +get_species() str
+        +describe() str
+        +add_task(task Task) None
+        +edit_task(task_id str, changes dict) None
+        +remove_task(task_id str) None
+        +get_tasks() list~Task~
+    }
+
+    class Scheduler {
         -list~Task~ planned
         -list~Task~ skipped
-        +add_task(task Task) None
-        +edit_task(title str, changes dict) None
-        +remove_task(title str) None
-        +sort_by_priority() list~Task~
-        +generate_plan(minutes_available int) list~Task~
+        +get_all_tasks(pets list~Pet~) list~Task~
+        +sort_by_priority(tasks list~Task~) list~Task~
+        +generate_plan(pets list~Pet~, minutes_available int) list~Task~
+        +explain_plan() str
+    }
+
+    class Owner {
+        -str name
+        -int age
+        -date dob
+        -int minutes_available
+        -list~Pet~ pets
+        +add_pet(pet Pet) None
+        +remove_pet(pet_id str) None
+        +get_pets() list~Pet~
+        +get_minutes_available() int
+        +set_minutes_available(minutes int) None
+        +generate_plan() list~Task~
         +explain_plan() str
     }
 
     %% Relationships
-    User "1" o-- "1" Pet : owns
-    User "1" --> "1" Schedule : maintains
-    Schedule "1" o-- "0..*" Task : contains
+    Owner "1" o-- "0..*" Pet : owns
+    Owner "1" --> "1" Scheduler : uses
+    Pet "1" o-- "0..*" Task : has

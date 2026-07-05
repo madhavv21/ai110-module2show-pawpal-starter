@@ -19,6 +19,8 @@ class Schedule: attributes like a list of Task objects. ability to change priori
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
+Yes, after further reviewing, my design did change from what the AI model initially proposed. One big change was the addition of an ID charactertistic to the task class. This was a good idea to add because the individual tasks have no other identifiers besides their names, but that could have potential overlap present which might interfere with intended functionality.
+
 ---
 
 ## 2. Scheduling Logic and Tradeoffs

@@ -46,6 +46,18 @@ pip install -r requirements.txt
 
 Paste a sample of your app's CLI or Streamlit output here so a reader can see what a generated plan looks like:
 
+Today's Schedule
+========================================
+Mochi: Feeding (10 min) [priority: high]
+Biscuit: Morning walk (30 min) [priority: high]
+Mochi: Litter box cleaning (15 min) [priority: medium]
+
+Why this plan:
+- Feeding (10 min, high priority): scheduled.
+- Morning walk (30 min, high priority): scheduled.
+- Litter box cleaning (15 min, medium priority): scheduled.
+- Grooming (45 min, low priority): skipped, not enough time remaining.
+
 ```
 # e.g.:
 # Daily plan for Biscuit (Golden Retriever):
