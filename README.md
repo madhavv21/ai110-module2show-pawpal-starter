@@ -80,6 +80,16 @@ Sample test output:
 
 ```
 # Paste your pytest output here
+Command: python -m pytest
+
+platform darwin -- Python 3.14.5, pytest-9.0.3, pluggy-1.6.0
+rootdir: /Users/mverma/AI 110/ai110-module2show-pawpal-starter
+plugins: anyio-4.13.0
+collected 14 items
+
+tests/test_pawpal.py ..............                                                                                                                                                                [100%]
+
+=========================================================================================== 14 passed in 0.02s ===========================================================================================
 ```
 
 ## 📐 Smarter Scheduling

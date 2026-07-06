@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import date, time, timedelta
 
 from pawpal_system import Owner, Pet, Scheduler, Task
 
@@ -114,3 +114,82 @@ def test_explain_conflicts_returns_empty_list_when_no_conflicts():
     dog.add_task(Task("Morning walk", 30, "high", scheduled_time=time(8, 0)))
 
     assert owner.explain_conflicts() == []
+
+
+def test_sort_by_time_returns_chronological_order():
+    scheduler = Scheduler()
+    grooming = Task("Grooming", 45, "low", scheduled_time=time(17, 0))
+    litter = Task("Litter box cleaning", 15, "medium", scheduled_time=time(12, 30))
+    walk = Task("Morning walk", 30, "high", scheduled_time=time(8, 0))
+    feeding = Task("Feeding", 10, "high", scheduled_time=time(7, 30))
+
+    # Added out of chronological order on purpose.
+    ordered = scheduler.sort_by_time([grooming, litter, walk, feeding])
+
+    assert [task.get_title() for task in ordered] == [
+        "Feeding",
+        "Morning walk",
+        "Litter box cleaning",
+        "Grooming",
+    ]
+
+
+def test_sort_by_time_places_unscheduled_tasks_last_and_preserves_their_order():
+    scheduler = Scheduler()
+    walk = Task("Morning walk", 30, "high", scheduled_time=time(8, 0))
+    vet_call = Task("Vet follow-up call", 5, "medium")
+    training = Task("Training session", 10, "medium")
+
+    ordered = scheduler.sort_by_time([vet_call, walk, training])
+
+    assert [task.get_title() for task in ordered] == [
+        "Morning walk",
+        "Vet follow-up call",
+        "Training session",
+    ]
+
+
+def test_sort_by_priority_orders_high_to_low_then_by_duration():
+    scheduler = Scheduler()
+    long_high = Task("Long high", 40, "high")
+    short_high = Task("Short high", 10, "high")
+    medium = Task("Medium task", 20, "medium")
+    low = Task("Low task", 5, "low")
+
+    ordered = scheduler.sort_by_priority([medium, long_high, low, short_high])
+
+    assert [task.get_title() for task in ordered] == [
+        "Short high",
+        "Long high",
+        "Medium task",
+        "Low task",
+    ]
+
+
+def test_completing_daily_task_schedules_it_for_the_following_day():
+    pet = Pet("Biscuit", "dog", "Golden Retriever", 4)
+    task = Task("Feeding", 10, "high", recurring="daily", scheduled_date=date(2026, 7, 6))
+    pet.add_task(task)
+
+    pet.complete_task(task.task_id)
+
+    next_task = next(t for t in pet.get_tasks() if t.task_id != task.task_id)
+    assert next_task.get_scheduled_date() == date(2026, 7, 6) + timedelta(days=1)
+    assert next_task.get_scheduled_date() == date(2026, 7, 7)
+
+
+def test_find_time_conflicts_flags_group_of_three():
+    scheduler = Scheduler()
+    pet = Pet("Biscuit", "dog", "Golden Retriever", 4)
+    same_slot_tasks = [
+        Task("Walk", 30, "high", scheduled_time=time(8, 0), scheduled_date=date(2026, 7, 6)),
+        Task("Feeding", 10, "high", scheduled_time=time(8, 0), scheduled_date=date(2026, 7, 6)),
+        Task("Training", 15, "medium", scheduled_time=time(8, 0), scheduled_date=date(2026, 7, 6)),
+    ]
+    for task in same_slot_tasks:
+        pet.add_task(task)
+
+    conflicts = scheduler.find_time_conflicts([pet])
+
+    assert len(conflicts) == 1
+    assert len(conflicts[0]) == 3
