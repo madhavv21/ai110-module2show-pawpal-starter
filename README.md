@@ -88,10 +88,22 @@ Sample test output:
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+
+Task Sorting:
+-Method(s): Scheduler.sort_by_priority(), Scheduler.sort_by_time()
+-Sorts by high, medium, and low priority tiers or by the tasks' scheduled time
+
+Filtering:
+-Method(s): Scheduler.filter_tasks(), Owner.filter_tasks()
+-Tasks filtered by completion status and/or pet name
+
+Conflict Handling:
+-Method(s): Scheduler.find_time_conflicts(), Scheduler.explain_conflicts(), Owner.find_time_conflicts(), Owner.explain_conflicts()
+-Detects tasks scheduled at the same time across all pets and raises conflict warning messages
+
+Recurring Tasks:
+-Method(s): Task.next_occurrence(), Pet.complete_task()
+-Based on the .recurring attribute, we can determine next occurence and then reschedule based on it
 
 ## 📸 Demo Walkthrough
 

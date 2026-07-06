@@ -59,6 +59,8 @@ classDiagram
         -date dob
         -int minutes_available
         -list~Pet~ pets
+        +get_name() str
+        +set_name(name str) None
         +add_pet(pet Pet) None
         +remove_pet(pet_id str) None
         +get_pets() list~Pet~

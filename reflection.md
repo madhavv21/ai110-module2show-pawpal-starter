@@ -35,6 +35,8 @@ Yes, after further reviewing, my design did change from what the AI model initia
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+Essentially, the algorithm is using a knapsack fitting. The simplification proposed by the AI model was that we use a 1D table instead of a 2D one, so drop memory used from O(n * capacity) to O(capacity). This is great optimization, but the tradeoff is that readability on the backend does suffer. Still, it's not a huge issue once you're able to figure out the "iterate backwards to avoid reusing an item twice" trick.
+
 ---
 
 ## 3. AI Collaboration
