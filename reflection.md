@@ -46,10 +46,14 @@ Essentially, the algorithm is using a knapsack fitting. The simplification propo
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
 - What kinds of prompts or questions were most helpful?
 
+Brainstorming as well as determining what algorithm to use (knapsack fitting) as well as implementing things properly and performing check were what the AI assistant was most helpful in.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
 - How did you evaluate or verify what the AI suggested?
+
+When the AI initially started working on this project, it immediately began trying to implement things on it's own and complete the project as fast as possible. So my approach was to tailor my prompts specifically to the task I wanted done and for that to be made clear in my prompt itself.
 
 ---
 
@@ -60,10 +64,14 @@ Essentially, the algorithm is using a knapsack fitting. The simplification propo
 - What behaviors did you test?
 - Why were these tests important?
 
+The key functionality of this app relies on the correctness in scheduling, determining priority of tasks, and dealing with things like recurrence and/or overlapping of tasks. The AI agent was able to create necessary tests to be certain the functionality of these features was as intended,
+
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
+
+I am fairly confident that our scheduler works correctly. Throughout the timeline of working through this project, there were multiple instances where we paused from writing more code or prompting more implementation to instead try to make sure what we had at the moment is not broken in any way, and if there are any loose ends that need to be tied up. Therefore, I think the app should work quite well to at least some degree.
 
 ---
 
@@ -73,10 +81,16 @@ Essentially, the algorithm is using a knapsack fitting. The simplification propo
 
 - What part of this project are you most satisfied with?
 
+I was satisfied with how smooth most of the process was in terms of the AI agent not having much trouble decoding the requirements, restrictions, and what the user asked for to be done.
+
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
 
+If I had another iteration, my time would most likely go towards improving the UI/UX system and adding a better visual appeal to our app.
+
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+A key takeaway I had from working with AI on this project and designing systems was that it's really important in OOP to understand how your objects interact with one another and what methods and attributes are responsible for what functionality. The idea of creating so many files seems intimidating but it is actually a really nice way to break the big thing down into smaller problems.

@@ -119,10 +119,13 @@ Recurring Tasks:
 
 Describe your app in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. Owner types their name, age, and minutes available today
+    Eg: Name: Madhav, Age: 19, Minutes available today: 180
+2. Owner adds a pet, chooses their name, their breed, the species, and its age
+    Eg: Pet name: Coco, Species: dog, Breed: Labrador, Pet age: 2
+3. Owner adds a task, which means giving it a title, setting a duration, determining its priority, choosing a category to place it in, and selecting whether its recurring or not.
+    Eg: Task Title: Walk, Duration: 40, Priority: medium, Category: Fitness, Recurring: daily
+4. Owner can click "Mark Done" or "Remove" as needed for this particular task.
+5. Owner can also generate a possible schedule for themselves, where they can also choose to maximize total tasks completed, but that may bump a single high-priority task for several smaller ones.
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->

@@ -93,7 +93,7 @@ else:
         if st.form_submit_button("Add task") and task_title:
             selected_pet.add_task(Task(task_title, int(duration), priority, category, recurring))
 
-    tasks = selected_pet.get_tasks()
+    tasks = owner.scheduler.sort_by_time(selected_pet.get_tasks())
     if not tasks:
         st.info(f"No tasks yet for {selected_pet.get_name()}.")
     else:
@@ -141,7 +141,7 @@ if "plan" in st.session_state:
     if not st.session_state.plan:
         st.info("No tasks fit today's plan.")
     else:
-        for task in st.session_state.plan:
+        for task in owner.scheduler.sort_by_time(st.session_state.plan):
             pet = pets_by_id.get(task.pet_id)
             pet_label = pet.get_name() if pet else "Unknown pet"
             st.write(f"- **{pet_label}**: {task.get_title()} ({task.get_duration()} min) [priority: {task.get_priority()}]")
